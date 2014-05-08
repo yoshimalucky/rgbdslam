@@ -93,7 +93,7 @@ LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
 SET(${CMAKE_LIBRARY_PATH} ${LIBRARY_OUTPUT_PATH})
 #SET(CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE TRUE)
 
-find_package(libg2o REQUIRED)
+#find_package(libg2o REQUIRED) # replaced
 ADD_DEFINITIONS(-DDO_FEATURE_OPTIMIZATION)
 
 
@@ -217,7 +217,17 @@ rosbuild_add_executable(rgbdslam ${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HP
 
 #set libs
 #SET(G2O_LIBS cholmod g2o_core g2o_stuff g2o_types_slam3d g2o_solver_cholmod g2o_solver_pcg g2o_solver_csparse cxsparse g2o_incremental)
-SET(G2O_LIBS ${libg2o_LIBRARIES} cholmod cxsparse)
+
+#SET(G2O_LIBS ${libg2o_LIBRARIES} cholmod cxsparse) # replaced with below
+SET(G2O_LIBS cholmod cxsparse -lg2o_cli -lg2o_core
+-lg2o_csparse_extension -lg2o_ext_freeglut_minimal -lg2o_incremental
+-lg2o_interactive -lg2o_interface -lg2o_opengl_helper -lg2o_parser
+-lg2o_simulator -lg2o_solver_cholmod -lg2o_solver_csparse
+-lg2o_solver_dense -lg2o_solver_pcg -lg2o_solver_slam2d_linear
+-lg2o_solver_structure_only -lg2o_stuff -lg2o_types_data -lg2o_types_icp
+-lg2o_types_sba -lg2o_types_sclam2d -lg2o_types_sim3 -lg2o_types_slam2d
+-lg2o_types_slam3d)
+
 #SET(LIBS_LINK GL GLU -lgl2ps ${G2O_LIBS} ${QT_LIBRARIES} ${QT_QTOPENGL_LIBRARY} ${GLUT_LIBRARY} ${OPENGL_LIBRARY} ${OpenCV_LIBS})
 SET(LIBS_LINK GL GLU ${G2O_LIBS} ${QT_LIBRARIES} ${QT_QTOPENGL_LIBRARY} ${GLUT_LIBRARY} ${OPENGL_LIBRARY} ${OpenCV_LIBS} -lboost_signals -lrt -loctomap -loctomap_server -loctomath)
 
