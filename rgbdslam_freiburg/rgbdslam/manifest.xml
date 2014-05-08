@@ -8,11 +8,14 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/rgbdslam</url>
   <depend package="tf"/>
-  <depend package="pcl"/>
   <depend package="rospy"/>
   <depend package="roscpp"/>
   <depend package="rosbag"/>
+
+  <!--depend package="pcl"/--> <!-- Deprecated! -->
   <depend package="pcl_ros"/>
+  <depend package="pcl_conversions"/>
+
   <!--depend package="opencv2"/-->
   <depend package="cv_bridge"/>
   <depend package="sensor_msgs"/>
